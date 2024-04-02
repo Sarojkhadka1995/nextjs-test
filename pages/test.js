@@ -6,7 +6,7 @@ const Test = () => {
         <>
             <p> This is a test page</p>
             <Link href={"/test2"}>
-                <button>Vist Test2</button>
+                <button>Click here to vist Test2</button>
             </Link>
         </>
     )
