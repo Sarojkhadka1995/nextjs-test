@@ -14,7 +14,8 @@ function MyApp({ Component, pageProps }) {
       if (prevBuildID !== currentBuildID) {
         console.log("New build")
         // Reset router cache to invalidate prefetched routes
-        window.location.reload();
+        // window.location.reload();
+        router.refresh();
         localStorage.setItem('PREV_BUILD_ID', currentBuildID);
       } else {
         console.log("SAme build")
