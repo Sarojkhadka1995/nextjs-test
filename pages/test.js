@@ -12,7 +12,7 @@ const Test = () => {
         <>
             <p>This is a test page</p>
             <Link href="/test2">
-                <button>GOTO TEST2 </button>
+                <button>TEST2 </button>
             </Link>
         </>
     );

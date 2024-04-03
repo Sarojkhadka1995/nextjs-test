@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { buildID } from '../buildID';
+
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -9,14 +11,18 @@ function MyApp({ Component, pageProps }) {
     const handleRouteChange = () => {
       // Check if a new build has occurred based on the build ID
       const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
-      const currentBuildID = process.env.NEXT_PUBLIC_BUILD_ID;
-      console.log("currentBuildID =====", currentBuildID)
+      console.log("buildID ====", buildID)
+
+      console.log("prevBuildID ====", prevBuildID)
+
+      const currentBuildID = buildID;
+      console.log("currentBuildID =====", prevBuildID !== currentBuildID)
 
       if (prevBuildID !== currentBuildID) {
         console.log("New build")
         // Reset router cache to invalidate prefetched routes
         // window.location.reload();
-        router.reload();
+        // router.reload();
         localStorage.setItem('PREV_BUILD_ID', currentBuildID);
       } else {
         console.log("SAme build")

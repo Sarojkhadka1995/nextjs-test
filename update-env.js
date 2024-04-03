@@ -4,4 +4,6 @@ const fs = require('fs');
 const buildID = new Date().getTime().toString();
 
 // Update the .env.local file with the new build ID
-fs.writeFileSync('.env.local', `NEXT_PUBLIC_BUILD_ID=${buildID}`);
+fs.writeFileSync('buildID.js', `module.exports = {
+    "buildID": ${JSON.stringify(buildID, null, 2)}
+}`);
