@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 
 
 const Test = () => {
-    const router = useRouter;
+    const router = useRouter();
     useEffect(() => {
-        router.refresh()
+        console.log('Test page =====')
     }, [])
     return (
         <>
