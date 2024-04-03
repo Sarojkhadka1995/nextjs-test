@@ -1,8 +1,11 @@
 import Head from "next/head";
+import { revalidatePath } from 'next/cache'
+
 
 
 
 const HomePage = ({ buildId }) => {
+  revalidatePath('/', 'layout')
   return (
     <div>
       <p>Build ID: {buildId}</p>
