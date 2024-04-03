@@ -1,9 +1,14 @@
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 
 
 const Test = () => {
+    const router = useRouter;
+    useEffect(() => {
+        router.refresh()
+    }, [])
     return (
         <>
             <p>This is a test page</p>
