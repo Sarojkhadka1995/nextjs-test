@@ -7,14 +7,12 @@ import { useEffect } from 'react';
 
 const Test = () => {
     const router = useRouter();
-    useEffect(() => {
-        console.log('Test page =====')
-    }, [])
+
     return (
         <>
             <p>This is a test page</p>
             <Link href="/test2">
-                <button>GOTO VISIT TEST2  </button>
+                <button>GOTO TEST2 </button>
             </Link>
         </>
     );
