@@ -11,7 +11,7 @@ export async function getStaticProps() {
     // No data fetching here (intentionally empty)
     return {
         props: {}, // Return an empty object
-        revalidate: 60, // Revalidate every 60 seconds (adjust as needed)
+        revalidate: 1, // Revalidate every 60 seconds (adjust as needed)
     };
 }
 
