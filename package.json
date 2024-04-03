@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build"
+    "start": "next start",
+    "build": "node update-env.js && next build"
   },
   "dependencies": {
     "next": "latest",
