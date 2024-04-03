@@ -10,12 +10,13 @@ function MyApp({ Component, pageProps }) {
       // Check if a new build has occurred based on the build ID
       const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
       const currentBuildID = process.env.NEXT_PUBLIC_BUILD_ID;
+      console.log("currentBuildID =====", currentBuildID)
 
       if (prevBuildID !== currentBuildID) {
         console.log("New build")
         // Reset router cache to invalidate prefetched routes
         // window.location.reload();
-        router.refresh();
+        router.reload();
         localStorage.setItem('PREV_BUILD_ID', currentBuildID);
       } else {
         console.log("SAme build")
