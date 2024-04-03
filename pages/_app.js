@@ -3,32 +3,44 @@ import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [currentBuildID, setCurrentBuildID] = useState(null);
+  // const [currentBuildID, setCurrentBuildID] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchBuildID = async () => {
+  //     try {
+  //       // Fetch the current build ID from your server
+  //       const response = await fetch('/api/build-id');
+  //       const data = await response.json();
+  //       console.log('Current build ====', data.buildID)
+  //       setCurrentBuildID(data.buildID);
+  //     } catch (error) {
+  //       console.error('Error fetching build ID:', error);
+  //     }
+  //   };
+
+  //   fetchBuildID();
+  // }, []);
 
   useEffect(() => {
-    const fetchBuildID = async () => {
+    const handleRouteChange = async () => {
+      let currentBuildID = null;
       try {
         // Fetch the current build ID from your server
         const response = await fetch('/api/build-id');
-        const data = await response.json();
+        currentBuildID = await response.json();
         console.log('Current build ====', data.buildID)
-        setCurrentBuildID(data.buildID);
+        // setCurrentBuildID(data.buildID);
       } catch (error) {
         console.error('Error fetching build ID:', error);
       }
-    };
 
-    fetchBuildID();
-  }, []);
 
-  useEffect(() => {
-    const handleRouteChange = () => {
       const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
-      if (prevBuildID !== currentBuildID) {
+      if (prevBuildID !== currentBuildID.buildID) {
         console.log("New build detected");
         // Reload the page to get the latest changes
         router.reload();
-        localStorage.setItem('PREV_BUILD_ID', currentBuildID);
+        localStorage.setItem('PREV_BUILD_ID', currentBuildID.buildID);
       } else {
         console.log("Same build");
       }
@@ -39,12 +51,9 @@ function MyApp({ Component, pageProps }) {
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [currentBuildID, router.events]);
+  }, [router.events]);
 
-  if (!currentBuildID) {
-    // Display a loading indicator while fetching the build ID
-    return <div>Loading...</div>;
-  }
+
 
   return <Component {...pageProps} />;
 }
