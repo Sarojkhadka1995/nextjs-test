@@ -1,84 +1,51 @@
-// pages/_app.js
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { buildID } from '../buildID';
-
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+  const [currentBuildID, setCurrentBuildID] = useState(null);
+
   useEffect(() => {
-    const handleRouteChange = () => {
-      // Check if a new build has occurred based on the build ID
-      const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
-      console.log("buildID ====", buildID)
-
-      console.log("prevBuildID ====", prevBuildID)
-
-      const currentBuildID = buildID;
-      console.log("currentBuildID =====", prevBuildID !== currentBuildID)
-
-      if (prevBuildID !== currentBuildID) {
-        console.log("New build")
-        // Reset router cache to invalidate prefetched routes
-        // window.location.reload();
-        // router.reload();
-        localStorage.setItem('PREV_BUILD_ID', currentBuildID);
-      } else {
-        console.log("SAme build")
+    const fetchBuildID = async () => {
+      try {
+        // Fetch the current build ID from your server
+        const response = await fetch('/api/build-id');
+        const data = await response.json();
+        setCurrentBuildID(data.buildID);
+      } catch (error) {
+        console.error('Error fetching build ID:', error);
       }
     };
 
-    // Listen for route changes
+    fetchBuildID();
+  }, []);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
+      if (prevBuildID !== currentBuildID) {
+        console.log("New build detected");
+        // Reload the page to get the latest changes
+        router.reload();
+        localStorage.setItem('PREV_BUILD_ID', currentBuildID);
+      } else {
+        console.log("Same build");
+      }
+    };
+
     router.events.on('routeChangeComplete', handleRouteChange);
 
-    // Remove the event listener when component unmounts
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events]);
+  }, [currentBuildID, router.events]);
+
+  if (!currentBuildID) {
+    // Display a loading indicator while fetching the build ID
+    return <div>Loading...</div>;
+  }
 
   return <Component {...pageProps} />;
 }
 
 export default MyApp;
-
-
-
-// pages/_app.js
-
-// import { useEffect } from 'react';
-// import { useRouter } from 'next/router';
-
-// function MyApp({ Component, pageProps }) {
-//   const router = useRouter();
-
-//   useEffect(() => {
-//     const handleRouteChange = () => {
-//       // Check if the build ID has changed
-//       const prevBuildId = localStorage.getItem('prevBuildId');
-//       const currentBuildId = process.env.NEXT_PUBLIC_BUILD_ID;
-
-//       if (prevBuildId && prevBuildId !== currentBuildId) {
-//         // Clear router cache to invalidate prefetched routes
-//         router.prefetch('/test2'); // Example of a route to prefetch
-//         // You can prefetch other routes as needed
-
-//         // Update the stored build ID
-//         localStorage.setItem('prevBuildId', currentBuildId);
-//       }
-//     };
-
-//     // Listen for route changes
-//     router.events.on('routeChangeComplete', handleRouteChange);
-
-//     // Remove the event listener when component unmounts
-//     return () => {
-//       router.events.off('routeChangeComplete', handleRouteChange);
-//     };
-//   }, [router.events]);
-
-//   return <Component {...pageProps} />;
-// }
-
-// export default MyApp;
