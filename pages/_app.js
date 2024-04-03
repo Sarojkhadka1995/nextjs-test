@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }) {
         // Fetch the current build ID from your server
         const response = await fetch('/api/build-id');
         const data = await response.json();
+        console.log('Current build ====', data.buildID)
         setCurrentBuildID(data.buildID);
       } catch (error) {
         console.error('Error fetching build ID:', error);
