@@ -8,9 +8,9 @@ const Test = () => {
   return (
     <>
       <p>This is a test page</p>
-      <Link href="/test2" prefetch={false}>
-        <button>TEST2 LINK TEST</button>
-      </Link>
+      <a href="/test2">
+        <button>TEST2 LINK</button>
+      </a>
     </>
   );
 };
