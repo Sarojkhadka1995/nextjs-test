@@ -4,8 +4,8 @@ const Test2 = () => {
   return (
     <>
       <p> This is a test2 page</p>
-      <Link href={'/test'}>
-        <button>TEST LINK with build id</button>
+      <Link href={'/test'} prefetch={false}>
+        <button>TEST LINK</button>
       </Link>
     </>
   );

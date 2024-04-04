@@ -8,8 +8,8 @@ const Test = () => {
   return (
     <>
       <p>This is a test page</p>
-      <Link href="/test2">
-        <button>TEST2 LINK with build id</button>
+      <Link href="/test2" prefetch={false}>
+        <button>TEST2 LINK</button>
       </Link>
     </>
   );
