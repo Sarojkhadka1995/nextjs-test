@@ -21,39 +21,36 @@ function MyApp({ Component, pageProps }) {
   //   fetchBuildID();
   // }, []);
 
-  useEffect(() => {
-    const handleRouteChange = async () => {
-      let currentBuildID = null;
-      try {
-        // Fetch the current build ID from your server
-        const response = await fetch('/api/build-id');
-        currentBuildID = await response.json();
-        console.log('Current build ====', currentBuildID.buildID)
-        // setCurrentBuildID(data.buildID);
-      } catch (error) {
-        console.error('Error fetching build ID:', error);
-      }
+  // useEffect(() => {
+  //   const handleRouteChange = async () => {
+  //     let currentBuildID = null;
+  //     try {
+  //       // Fetch the current build ID from your server
+  //       const response = await fetch('/api/build-id');
+  //       currentBuildID = await response.json();
+  //       console.log('Current build ====', currentBuildID.buildID)
+  //       // setCurrentBuildID(data.buildID);
+  //     } catch (error) {
+  //       console.error('Error fetching build ID:', error);
+  //     }
 
+  //     const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
+  //     if (prevBuildID !== currentBuildID.buildID) {
+  //       console.log("New build detected");
+  //       // Reload the page to get the latest changes
+  //       router.reload();
+  //       localStorage.setItem('PREV_BUILD_ID', currentBuildID.buildID);
+  //     } else {
+  //       console.log("Same build");
+  //     }
+  //   };
 
-      const prevBuildID = localStorage.getItem('PREV_BUILD_ID');
-      if (prevBuildID !== currentBuildID.buildID) {
-        console.log("New build detected");
-        // Reload the page to get the latest changes
-        router.reload();
-        localStorage.setItem('PREV_BUILD_ID', currentBuildID.buildID);
-      } else {
-        console.log("Same build");
-      }
-    };
+  //   router.events.on('routeChangeStart', handleRouteChange);
 
-    router.events.on('routeChangeStart', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeStart', handleRouteChange);
-    };
-  }, [router.events]);
-
-
+  //   return () => {
+  //     router.events.off('routeChangeStart', handleRouteChange);
+  //   };
+  // }, [router.events]);
 
   return <Component {...pageProps} />;
 }
