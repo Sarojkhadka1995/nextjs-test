@@ -9,7 +9,7 @@ const Test = () => {
     <>
       <p>This is a test page</p>
       <Link href="/test2">
-        <button>TEST2 build check 1</button>
+        <button>TEST2 build check 2</button>
       </Link>
     </>
   );
