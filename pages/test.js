@@ -9,7 +9,7 @@ const Test = () => {
     <>
       <p>This is a test page</p>
       <Link href="/test2" prefetch={false}>
-        <button>TEST2 LINK</button>
+        <button>TEST2 LINK TEST</button>
       </Link>
     </>
   );
