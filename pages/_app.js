@@ -22,7 +22,8 @@ function MyApp({ Component, pageProps }) {
   // }, []);
 
   useEffect(() => {
-    const handleRouteChange = async () => {
+    const handleRouteChange = async (url) => {
+      console.log('Upcoming route:', url);
       let currentBuildID = null;
       try {
         // Fetch the current build ID from your server
@@ -39,6 +40,7 @@ function MyApp({ Component, pageProps }) {
         console.log('New build detected');
         // Reload the page to get the latest changes
         router.reload();
+        router.prefetch(url);
         localStorage.setItem('PREV_BUILD_ID', currentBuildID.buildID);
       } else {
         console.log('Same build');
