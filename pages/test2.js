@@ -1,15 +1,14 @@
-import Link from "next/link"
-
+import Link from 'next/link';
 
 const Test2 = () => {
-    return (
-        <>
-            <p> This is a test2 page</p>
-            <Link href={"/test"}>
-                <button>TEST LINK4</button>
-            </Link>
-        </>
-    )
-}
+  return (
+    <>
+      <p> This is a test2 page</p>
+      <Link href={'/test'}>
+        <button>TEST</button>
+      </Link>
+    </>
+  );
+};
 
-export default Test2
+export default Test2;
